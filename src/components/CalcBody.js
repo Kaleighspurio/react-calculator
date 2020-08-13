@@ -10,12 +10,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 export default function CalcBody() {
     return (
         <Container>
-            <Row className="justify-content-md-center">
-                <Col md="6">
+            <Row xs={2} md={4} lg={6} className="justify-content-center">
+                <Col>
                     <ScreenDiv/>
                 </Col>
             </Row>
-            <Row>
+            <Row xs={2} md={4} lg={6} className="justify-content-center">
             <Col xs={3}>
                 <NumButton/>
             </Col>
@@ -29,7 +29,7 @@ export default function CalcBody() {
                 <OperationButton/>
             </Col>
             </Row>
-            <Row>
+            <Row xs={2} md={4} lg={6} className="justify-content-center">
             <Col xs={3}>
                 <NumButton/>
             </Col>
@@ -43,7 +43,7 @@ export default function CalcBody() {
                 <OperationButton/>
             </Col>
             </Row>
-            <Row>
+            <Row xs={2} md={4} lg={6} className="justify-content-center">
             <Col xs={3}>
                 <NumButton/>
             </Col>
@@ -57,7 +57,7 @@ export default function CalcBody() {
                 <OperationButton/>
             </Col>
             </Row>
-            <Row>
+            <Row xs={2} md={4} lg={6} className="justify-content-center">
             <Col xs={3}>
                 <ClearButton/>
             </Col>
