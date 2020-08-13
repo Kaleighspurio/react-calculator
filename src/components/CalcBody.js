@@ -4,18 +4,19 @@ import ClearButton from './ClearButton';
 import EqualButton from './EqualButton';
 import OperationButton from './OperationButton';
 import ScreenDiv from './ScreenDiv';
-
-import { Container, Row, Col, Alert } from 'react-bootstrap';
 import AlertEl from './AlertEl';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import './style.css';
 
 export default function CalcBody() {
-  const [state, setState] = useState('');
+  const [mathProblem, setMathProblem] = useState('');
   const [alert, setAlert] = useState('hide');
   const [alertMessage, setAlertMessage] = useState('');
 
   const handleButtonClick = (event) => {
-    const newState = state.concat(event.target.value);
-    setState(newState);
+    const newState = mathProblem.concat(event.target.value);
+    setMathProblem(newState);
   };
 
   const typoAlert = () => {
@@ -25,7 +26,7 @@ export default function CalcBody() {
   };
 
   const handleEqual = (event) => {
-    const stateString = state;
+    const stateString = mathProblem;
     const splitStr = stateString.split(' ');
     if (splitStr.length > 3) {
       setAlertMessage(
@@ -41,32 +42,32 @@ export default function CalcBody() {
       if (isNaN(sum)) {
         typoAlert();
       } else {
-        const answerState = state.concat(` = ${sum}`);
-        setState(answerState);
+        const answerState = mathProblem.concat(` = ${sum}`);
+        setMathProblem(answerState);
       }
     } else if (splitStr[1] === '-') {
       const difference = num1 - num2;
       if (isNaN(difference)) {
         typoAlert();
       } else {
-        const answerState = state.concat(` = ${difference}`);
-        setState(answerState);
+        const answerState = mathProblem.concat(` = ${difference}`);
+        setMathProblem(answerState);
       }
     } else if (splitStr[1] === 'x') {
       const product = num1 * num2;
       if (isNaN(product)) {
         typoAlert();
       } else {
-        const answerState = state.concat(` = ${product}`);
-        setState(answerState);
+        const answerState = mathProblem.concat(` = ${product}`);
+        setMathProblem(answerState);
       }
     } else if (splitStr[1] === '÷') {
       const quotient = num1 / num2;
       if (isNaN(quotient)) {
         typoAlert();
       } else {
-        const answerState = state.concat(` = ${quotient}`);
-        setState(answerState);
+        const answerState = mathProblem.concat(` = ${quotient}`);
+        setMathProblem(answerState);
       }
     } else {
       setAlert('show');
@@ -77,7 +78,7 @@ export default function CalcBody() {
   };
 
   const handleClear = (event) => {
-    setState('');
+    setMathProblem('');
     setAlert('hide');
     setAlertMessage('');
   };
@@ -89,11 +90,11 @@ export default function CalcBody() {
   };
 
   return (
-    <Container>
+    <Container className="calc-body">
       {showAlert()}
       <Row className="justify-content-center">
-        <Col>
-          <ScreenDiv input={state} />
+        <Col xl="9" lg="10" md="12" sm="11" xs="11">
+          <ScreenDiv input={mathProblem} />
         </Col>
       </Row>
       <Row xs={2} md={4} lg={6} className="justify-content-center">

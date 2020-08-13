@@ -1,8 +1,9 @@
 import React from 'react';
+import './style.css';
 
 export default function ScreenDiv(props) {
     return (
-        <div>
+        <div className="screen-display">
             <span>{props.input}</span>
         </div>
     )
