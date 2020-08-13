@@ -5,23 +5,33 @@ import EqualButton from './EqualButton';
 import OperationButton from './OperationButton';
 import ScreenDiv from './ScreenDiv';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Alert } from 'react-bootstrap';
+import AlertEl from './AlertEl';
 
 export default function CalcBody() {
   const [state, setState] = useState('');
+  const [alert, setAlert] = useState('hide');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleButtonClick = (event) => {
     const newState = state.concat(event.target.value);
     setState(newState);
   };
 
+  const typoAlert = () => {
+    setAlert('show');
+    setAlertMessage('Oops! I think you may have a typo!');
+    return;
+  };
+
   const handleEqual = (event) => {
     const stateString = state;
     const splitStr = stateString.split(' ');
     if (splitStr.length > 3) {
-      alert(
-        'oops! This is a dumb calculator- You can only perform one operation on 2 numbers at a time'
+      setAlertMessage(
+        'Oops! This is a dumb calculator- You can only perform one operation at a time.  Positive numbers only...'
       );
+      setAlert('show');
       return;
     }
     const num1 = parseInt(splitStr[0]);
@@ -29,34 +39,38 @@ export default function CalcBody() {
     if (splitStr[1] === '+') {
       const sum = num1 + num2;
       if (isNaN(sum)) {
-        alert('Oops! I think you may have a typo!');
-        return;
+        typoAlert();
+      } else {
+        const answerState = state.concat(` = ${sum}`);
+        setState(answerState);
       }
-      const answerState = state.concat(` = ${sum}`);
-      setState(answerState);
     } else if (splitStr[1] === '-') {
       const difference = num1 - num2;
       if (isNaN(difference)) {
-        alert('Oops! I think you may have a typo!');
+        typoAlert();
+      } else {
+        const answerState = state.concat(` = ${difference}`);
+        setState(answerState);
       }
-      const answerState = state.concat(` = ${difference}`);
-      setState(answerState);
     } else if (splitStr[1] === 'x') {
       const product = num1 * num2;
       if (isNaN(product)) {
-        alert('Oops! I think you may have a typo!');
+        typoAlert();
+      } else {
+        const answerState = state.concat(` = ${product}`);
+        setState(answerState);
       }
-      const answerState = state.concat(` = ${product}`);
-      setState(answerState);
     } else if (splitStr[1] === '÷') {
       const quotient = num1 / num2;
       if (isNaN(quotient)) {
-        alert('Oops! I think you may have a typo!');
+        typoAlert();
+      } else {
+        const answerState = state.concat(` = ${quotient}`);
+        setState(answerState);
       }
-      const answerState = state.concat(` = ${quotient}`);
-      setState(answerState);
     } else {
-      alert(
+      setAlert('show');
+      setAlertMessage(
         'Hmmm, something went wrong...Check what you put into the calculator and try again.'
       );
     }
@@ -64,10 +78,19 @@ export default function CalcBody() {
 
   const handleClear = (event) => {
     setState('');
+    setAlert('hide');
+    setAlertMessage('');
+  };
+
+  const showAlert = () => {
+    if (alert === 'show') {
+      return <AlertEl message={alertMessage} />;
+    }
   };
 
   return (
     <Container>
+      {showAlert()}
       <Row className="justify-content-center">
         <Col>
           <ScreenDiv input={state} />
