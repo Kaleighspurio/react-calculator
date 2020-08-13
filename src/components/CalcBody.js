@@ -17,6 +17,12 @@ export default function CalcBody() {
     setState(newState);
   };
 
+  const handleEqual = (event) => {}
+
+  const handleClear = (event) => {
+      setState('');
+  }
+
   return (
     <Container>
       <Row className="justify-content-center">
@@ -68,7 +74,7 @@ export default function CalcBody() {
       </Row>
       <Row xs={2} md={4} lg={6} className="justify-content-center">
         <Col xs={3}>
-          <ClearButton />
+          <ClearButton handleClear={handleClear} />
         </Col>
         <Col xs={3}>
           <NumButton value={0} handleButtonClick={handleButtonClick} />
