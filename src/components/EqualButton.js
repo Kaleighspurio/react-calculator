@@ -1,7 +1,6 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 export default function EqualButton() {
-    return (
-        <button>Equal</button>
-    )
+  return <Button variant="outline-success">Equal</Button>;
 }

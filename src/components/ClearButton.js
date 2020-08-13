@@ -1,7 +1,8 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 export default function ClearButton() {
     return (
-        <button>Clear</button>
+        <Button variant="outline-danger">Clear</Button>
     )
 }
