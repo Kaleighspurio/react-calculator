@@ -6,6 +6,7 @@ export default function Header() {
     <Jumbotron fluid>
       <Container>
         <h1>Four Function Calulator</h1>
+        <p>This simple calculator handles single operation math problems.</p>
       </Container>
     </Jumbotron>
   );

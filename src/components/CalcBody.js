@@ -12,14 +12,12 @@ export default function CalcBody() {
 
   const handleButtonClick = (event) => {
     const newState = state.concat(event.target.value);
-    console.log(newState);
     setState(newState);
   };
 
   const handleEqual = (event) => {
     const stateString = state;
     const splitStr = stateString.split(' ');
-    console.log(splitStr);
     if (splitStr.length > 3) {
       alert(
         'oops! This is a dumb calculator- You can only perform one operation on 2 numbers at a time'
@@ -30,7 +28,6 @@ export default function CalcBody() {
     const num2 = parseInt(splitStr[2]);
     if (splitStr[1] === '+') {
       const sum = num1 + num2;
-      console.log(sum);
       if (isNaN(sum)) {
         alert('Oops! I think you may have a typo!');
         return;
@@ -39,23 +36,20 @@ export default function CalcBody() {
       setState(answerState);
     } else if (splitStr[1] === '-') {
       const difference = num1 - num2;
-      console.log(difference);
       if (isNaN(difference)) {
         alert('Oops! I think you may have a typo!');
       }
       const answerState = state.concat(` = ${difference}`);
       setState(answerState);
-    } else if (splitStr[1] === '*') {
+    } else if (splitStr[1] === 'x') {
       const product = num1 * num2;
-      console.log(product);
       if (isNaN(product)) {
         alert('Oops! I think you may have a typo!');
       }
       const answerState = state.concat(` = ${product}`);
       setState(answerState);
-    } else if (splitStr[1] === '/') {
+    } else if (splitStr[1] === '÷') {
       const quotient = num1 / num2;
-      console.log(quotient);
       if (isNaN(quotient)) {
         alert('Oops! I think you may have a typo!');
       }
@@ -91,7 +85,7 @@ export default function CalcBody() {
         </Col>
         <Col xs={3}>
           <OperationButton
-            operation={' / '}
+            operation={' ÷ '}
             handleButtonClick={handleButtonClick}
           />
         </Col>
@@ -108,7 +102,7 @@ export default function CalcBody() {
         </Col>
         <Col xs={3}>
           <OperationButton
-            operation={' * '}
+            operation={' x '}
             handleButtonClick={handleButtonClick}
           />
         </Col>
